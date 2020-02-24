@@ -5,28 +5,29 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "teacherapp"
   end
 
   get "/" do
     erb :welcome
   end
-  
+
+
   get "/signup" do
     erb :signup
   end
 
-  post "/signup" do
-    if params[:username] == "" || params[:password] == ""
-      redirect '/failure'
-    else
-      Users.create(username: params[:username], password: params[:password])
-      redirect '/login'
-    end
+  post '/signup' do
+    @users = User.new(name: params["name"], email: params["username"], password: params["password"])
+    @users.save
+    session[:user_id] = @users.id
 
+    redirect '/account'
   end
 
   get '/account' do
-    @user = Users.find_by(username: params[:username])
+    @users = User.find_by(username: params[:username])
     erb :account
   end
 
@@ -36,7 +37,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/login" do
-    @user = Users.find_by(username: params[:username])
+    @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect to "/account"
@@ -54,17 +55,4 @@ class ApplicationController < Sinatra::Base
     redirect "/"
   end
   
-  
-    helpers do
-  
-      def logged_in?
-        !!session[:user_id]
-      end
-  
-      def current_user
-        Users.find(session[:user_id])
-      end
-    
-    end
-
 end
