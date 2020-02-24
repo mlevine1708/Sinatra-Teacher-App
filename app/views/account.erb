@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <link rel="stylesheet" href="stylesheets/bootstrap.css" type="text/css">  
+  </head>
+  <body id="page-top">
+    <% if Users.logged_in?(session) %>
+      <h1>Welcome <%= Users.current_user(session).username %></h1>
+      
+    
+      <h4><a href="/logout">Log Out</a></h4>
+    <% end %>
+  </body>
+</html>
+© 2020 GitHub, Inc.
