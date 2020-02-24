@@ -7,7 +7,9 @@ end
 use Rack::MethodOverride
 
 run ApplicationController
-use StudentController
+use StudentsController
+use UsersController
+
 
 
 
