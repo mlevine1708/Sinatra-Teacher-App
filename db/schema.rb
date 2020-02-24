@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200223211027) do
+ActiveRecord::Schema.define(version: 20200224030124) do
+
+  create_table "assignments", force: :cascade do |t|
+    t.string  "title"
+    t.string  "subject"
+    t.integer "user_id"
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string  "name"
+    t.integer "grade_level"
+    t.integer "user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string  "name"
