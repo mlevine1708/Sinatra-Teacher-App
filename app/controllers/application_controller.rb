@@ -19,7 +19,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    @users = User.new(name: params["name"], email: params["username"], password: params["password"])
+    @users = User.new(name: params["name"], username: params["username"], password: params["password"])
     @users.save
     session[:user_id] = @users.id
 
@@ -54,5 +54,7 @@ class ApplicationController < Sinatra::Base
     session.clear
     redirect "/"
   end
+  
+  
   
 end
