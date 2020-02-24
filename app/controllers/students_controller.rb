@@ -1,14 +1,14 @@
 require './config/environment'
 
-class StudentController < Sinatra::Base
+class StudentsController < ApplicationController
   
   get '/students' do
     #if logged_in?
      # @student = current_user.students
       erb :'/students'
-    else 
+    #else 
       redirect to('/login')
-    end
+    #end
   end
   
   get '/students/create' do
@@ -56,15 +56,14 @@ class StudentController < Sinatra::Base
     @student = Students.find(params[:id])
     @student.update(params[:student])
     
-    if !params["name"]["grade_level"].empty?
-      @student.user = User.create(name: params["student"]["grade_level"])
-    end
+      if !params["name"]["grade_level"].empty?
+        @student.user = User.create(name: params["student"]["grade_level"])
+      end
     
     @student.save
     
-    redirect to "students/#{@student.id}"
-  end 
-  
+      redirect to "students/#{@student.id}"
+    end 
 end
 
   
