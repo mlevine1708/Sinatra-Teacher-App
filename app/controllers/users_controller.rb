@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     @user = Users.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect to '/students/new'
+      redirect to '/students/create'
     else
       @errors = "Invalid username or password."
       erb :'/login'

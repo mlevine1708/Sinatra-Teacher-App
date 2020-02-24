@@ -11,10 +11,10 @@ class StudentController < Sinatra::Base
     end
   end
   
-  get '/students/new' do
+  get '/students/create' do
     if logged_in?
       @current_user
-    erb :'/students/new'
+    erb :'/students/create'
     else 
       redirect to('/login')
     end
@@ -24,7 +24,7 @@ class StudentController < Sinatra::Base
   post '/students' do
     if logged_in?
       @student = Student.create(name: params[:name], grade_level: params[:grade_level], user_id: current_user.id)
-      erb :'/students/new'
+      erb :'/students/create'
     else
       redirect '/students/index'
     end
@@ -65,19 +65,6 @@ class StudentController < Sinatra::Base
     redirect to "students/#{@student.id}"
   end 
   
-  
-  helpers do 
-    
-    def logged_in?
-      !!session[:user_id]
-      #double bang (!!) 
-    end
-    
-    
-    def current_user
-     @current_user ||=Users.find(session[:user_id])
-    end
-  end 
 end
 
   
