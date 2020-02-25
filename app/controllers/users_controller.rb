@@ -1,36 +1,17 @@
 class UsersController < ApplicationController
   
-  
-  get '/signup' do
-    if !session[:user_id]
-      erb :'signup'
-    else
-      redirect to ('/students')
-    end 
-  end 
-  
-  post '/signup' do
-    @users = User.new(name: params["name"], username: params["username"], password: params["password"])
-    @users.save
-    session[:user_id] = @users.id
-
-    redirect '/account'
-  end
-
-  
-  
   get '/login' do
-    if !session[:user_id]
+    #if !session[:user_id]
       erb :'/login'
-    else
-      redirect to '/students'
-    end
+    #else
+     # redirect to '/students'
+    #end
   end 
   
   post '/login' do
     user = User.find_by(username: params[:username])
-      if user.authenticate(params[:password])
-     binding.pry
+      if user && user.authenticate(params[:password])
+        binding.pry
       else
       redirect '/login'
       end 
