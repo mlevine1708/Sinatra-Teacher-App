@@ -22,24 +22,24 @@ class UsersController < ApplicationController
     "Users Show Route"
   end
   
-  get '/logout' do
-    if logged_in?
-      @user = current_user
-      @user = nil 
-      session.destroy
-      redirect to '/login'
-    else
-      redirect to '/'
-    end
-  end
-  
   get "/failure" do
     erb :failure
   end
 
   get "/logout" do
     session.clear
+    binding.pry
     redirect "/"
   end
   
-end
+  get "/signup" do
+    erb :'/signup'
+  end
+  
+  post '/users'do
+    @user = User.create(params)
+    session[:user_id] = @user.id 
+    redirect "/users/#{@user.id}"
+  end 
+end 
+  
