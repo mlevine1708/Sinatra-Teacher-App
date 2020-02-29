@@ -14,7 +14,21 @@
     <link rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <body>
+    
+    
+    
     <div class="wrapper">
+      
+      <div class="nav">
+      <% if logged_in? %>
+        <a href="/">All Students</a>
+        <a href="/">Add Students</a>
+        <a href="/">Add Assignments</a>
+        <a href="/logout">Log Out</a>
+      
+      <% end %>
+      
+    </div>
 
         <%= yield %>
 
