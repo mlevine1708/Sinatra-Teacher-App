@@ -9,6 +9,8 @@ use Rack::MethodOverride
 run ApplicationController
 use StudentsController
 use UsersController
+use AssignmentsController
+
 
 
 
