@@ -20,7 +20,7 @@ class StudentsController < ApplicationController
   end 
   
   post "/students" do 
-    student = Student.new(name: params[:name], grade_level: params[:grade_level], user_id: current_user.id)
+    student = Students.new(name: params[:name], grade_level: params[:grade_level], user_id: current_user.id)
     if student.save
       flash[:message] = "Successfully created student!"
       redirect "/students/#{student.id}"
@@ -35,7 +35,7 @@ class StudentsController < ApplicationController
   
   #show route for a single student 
   get '/students/:id' do
-    @student = Student.find(params[:id])
+    @student = Students.find(params[:id])
     erb :"/students/show"
   end
   
