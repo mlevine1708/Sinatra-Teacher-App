@@ -35,13 +35,13 @@ class StudentsController < ApplicationController
   
   #show route for a single student 
   get '/students/:id' do
-   # @student = Students.find(params[:id])
+    @student = Students.find(params[:id])
     erb :"/students/show"
   end
   
   #UPDATE
   get '/students/:id/edit' do
-    @student = Student.find(params[:id])
+    @student = Students.find(params[:id])
     if authorized_to_edit?(@student)
       erb :'/students/edit'
     else
@@ -52,14 +52,14 @@ class StudentsController < ApplicationController
   #DELETE 
   
   patch '/students/:id' do
-    @student = Student.find(params[:id])
+    @student = Students.find(params[:id])
     @student.update(name: params[:name], grade_level: params[:grade_level])
     redirect "/students/#{@student.id}"
   end 
 
-  delete '/students/:id/delete' do
-    @students = Student.find(params[:id])
-    if logged_in? && @students.user == current_user
+  delete '/students/:id' do
+    @student = Students.find(params[:id])
+    if logged_in? && @student.user == current_user
       @student.destroy
       redirect to('/students')
     else
