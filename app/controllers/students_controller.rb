@@ -12,7 +12,7 @@ class StudentsController < ApplicationController
   #render a form to create a new student 
   get "students/new" do
     if logged_in?
-      erb :"students/create"
+      erb :"users/show"
     else 
       flash[:error] = "You must be logged in to add to your student list."
       redirect "/"
