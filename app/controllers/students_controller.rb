@@ -12,7 +12,8 @@ class StudentsController < ApplicationController
   end 
   
   post "/students" do 
-    
+    student = Student.create(name: params[:name], grade_level: params[:grade_level], user_id: current_user.id)
+    redirect "/students/#{student.id}"
   end 
   
   #READ 
