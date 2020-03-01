@@ -1,38 +1,29 @@
 class UsersController < ApplicationController
   
   get '/login' do
-    #if !session[:user_id]
-      erb :'/login'
-    #else
-     # redirect to '/students'
-    #end
+      erb :'users/login'
   end 
   
   post '/login' do
     user = User.find_by(username: params[:username])
-      if user && user.authenticate(params[:password])
+    if user && user.authenticate(params[:password])
       session[:user_id] = user.id 
+      flash[:message] = "Welcome to your teacher page, #{user.name}!"
       redirect "/users/#{user.id}"
       else
+        flash[:error] = "Your login was invalid.  Please try again!"
       redirect '/login'
       end 
   end 
   
   get '/users/:id' do
-    "Users Show Route"
+    @user = User.find_by(id: params[:id])
+    erb :'/users/show'
   end
   
-  get "/failure" do
-    erb :failure
-  end
-
-  get "/logout" do
-    session.clear
-    redirect "/"
-  end
   
   get "/signup" do
-    erb :'/signup'
+    erb :'/users/signup'
   end
   
   post '/users'do
@@ -40,5 +31,10 @@ class UsersController < ApplicationController
     session[:user_id] = @user.id 
     redirect "/users/#{@user.id}"
   end 
+  
+  get "/logout" do
+    session.clear
+    redirect "/"
+  end
 end 
   

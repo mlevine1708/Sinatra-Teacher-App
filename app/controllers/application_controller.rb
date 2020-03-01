@@ -7,6 +7,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "teacherapp"
+    register Sinatra::Flash
   end
 
   get "/" do
@@ -32,6 +33,10 @@ class ApplicationController < Sinatra::Base
     def logged_in?
       !!current_user
     end
+    
+    def authorized_to_edit?(student)
+      student.user == current_user
+    end 
     
   end
 
