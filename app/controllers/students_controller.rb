@@ -35,7 +35,7 @@ class StudentsController < ApplicationController
   
   #show route for a single student 
   get '/students/:id' do
-    @student = Students.find(params[:id])
+   # @student = Students.find(params[:id])
     erb :"/students/show"
   end
   
@@ -57,6 +57,15 @@ class StudentsController < ApplicationController
     redirect "/students/#{@student.id}"
   end 
 
+  delete '/students/:id/delete' do
+    @students = Student.find(params[:id])
+    if logged_in? && @students.user == current_user
+      @student.destroy
+      redirect to('/students')
+    else
+      redirect to('/login')
+    end
+  end
 end
 
   
