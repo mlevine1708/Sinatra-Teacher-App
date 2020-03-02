@@ -33,7 +33,7 @@ class AssignmentsController < ApplicationController
   get '/assignments/:id/edit' do
     @assignment = Assignments.find(params[:id])
     if authorized_to_edit?(@assignment)
-      erb :'/assignment/edit'
+      erb :'/assignments/edit'
     else
       flash[:error] = "Not authorized to edit that assignment."
       redirect "/assignments"
