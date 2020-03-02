@@ -1,0 +1,7 @@
+<h1>All Assignments</h1>
+<% @assignments.each do |assignment| %>
+  <h4><a href="/assignments/<%= assignment.id %>"><%=assignment.title %></a></h4>
+  <p><%= assignment.subject %></p>
+  
+<% end %>
+

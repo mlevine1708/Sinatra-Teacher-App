@@ -2,14 +2,11 @@ require './config/environment'
 
 class StudentsController < ApplicationController
   
-  #CRUD 
   get '/students' do
     @students = Students.all 
     erb :'students/index'
   end 
 
-  #CREATE
-  #render a form to create a new student 
   get "students/new" do
     if logged_in?
       erb :"users/show"
@@ -30,16 +27,12 @@ class StudentsController < ApplicationController
     end 
   end 
   
-  #READ 
-  # index route for all students 
   
-  #show route for a single student 
   get '/students/:id' do
     @student = Students.find(params[:id])
     erb :"/students/show"
   end
   
-  #UPDATE
   get '/students/:id/edit' do
     @student = Students.find(params[:id])
     if authorized_to_edit?(@student)
@@ -49,7 +42,6 @@ class StudentsController < ApplicationController
       redirect "/students"
     end
   end 
-  #DELETE 
   
   patch '/students/:id' do
     @student = Students.find(params[:id])

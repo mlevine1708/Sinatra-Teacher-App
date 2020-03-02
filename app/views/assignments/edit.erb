@@ -1,0 +1,10 @@
+<h1>Edit Assignments!</h1>
+
+<form class="" action="/assignments/<%= @assignment.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label for="title">Title:</label>
+  <input type="text" name="title" value ="<%= @assignment.title %>">
+  <label for="subject">Subject:</label>
+  <input type="text" name="subject" value ="<%= @assignment.subject %>">
+  <input type="submit" name="" value="Edit Post">
+</form>

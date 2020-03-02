@@ -1,0 +1,18 @@
+<h3><%= @assignment.title %></h3>
+<p><%= @assignment.subject %></p>
+
+<% if authorized_to_edit?(@assignment) %>
+
+<a href="/assignments/<%= @assignment.id %>/edit">Edit Assignment</a>
+
+
+
+<form class="" action="/assignments/<%= @assignment.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" name="" value="Delete This Assignment">
+</form>
+
+
+
+
+<% end %>
