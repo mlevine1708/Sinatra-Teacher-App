@@ -40,7 +40,7 @@ class AssignmentsController < ApplicationController
     end
   end 
   
-  patch '/assignment/:id' do
+  patch '/assignments/:id' do
     @assignment = Assignments.find(params[:id])
     @assignment.update(title: params[:title], subject: params[:subject])
     redirect "/assignments/#{@assignment.id}"
