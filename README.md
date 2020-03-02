@@ -1,4 +1,6 @@
 Sinatra Teacher App
+
+
 A simple Sinatra-powered web application created to save and track a teacher's students and assignments.
 
 
