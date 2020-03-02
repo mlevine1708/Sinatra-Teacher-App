@@ -18,10 +18,10 @@ class AssignmentsController < ApplicationController
     assignment = Assignments.new(title: params[:title], subject: params[:subject], user_id: current_user.id)
     if assignment.save
       flash[:message] = "Successfully created assignment!"
-      redirect "/assignment/#{assignment.id}"
+      redirect "/assignments/#{assignment.id}"
     else
       flash[:error] = "Assignment creation failed..."
-      redirect "/assignment/create"
+      redirect "/assignments/create"
     end 
   end 
   
