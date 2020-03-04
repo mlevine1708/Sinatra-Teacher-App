@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   
   post '/login' do
     user = User.find_by(username: params[:username])
-    if user && user.authenticate(params[:password])
+      if user && user.authenticate(password: params[:password])
       session[:user_id] = user.id 
       flash[:message] = "Welcome to your teacher page, #{user.name}!"
       redirect "/users/#{user.id}"
