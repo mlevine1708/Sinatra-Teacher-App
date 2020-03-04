@@ -5,11 +5,11 @@ class UsersController < ApplicationController
   end 
   
   post '/login' do
-    user = User.find_by(username: params[:username])
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id 
-      flash[:message] = "Welcome to your teacher page, #{user.name}!"
-      redirect "/users/#{user.id}"
+    @user = User.find_by(username: params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id 
+      flash[:message] = "Welcome to your teacher page, #{@user.name}!"
+      redirect "/users/#{@user.id}"
       else
         flash[:error] = "Your login was invalid.  Please try again!"
       redirect '/login'
